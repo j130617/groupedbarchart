@@ -111,7 +111,7 @@ d3.csv("data.csv", function(d, i, columns) {
 	// Add the Y Axis
   svg.append("g")
       .attr("class", "axis")
-      .call(d3.axisLeft(y).ticks(10, "%"));
+      .call(d3.axisLeft(y) //.ticks(10, "%"));
   
      	// Add a small label for the graph name.
   svg.append("text")
@@ -121,7 +121,7 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("font-weight", "bold")
       .style("text-anchor", "start")
       .style("font-size", 9)
-      .text("Winstgevendheid");   
+      .text("Online omzet volgens CBS en TMM");   
   
   var legendHolder = svg.append('g')
       // translate the holder to the right side of the graph
