@@ -137,13 +137,13 @@ d3.csv("data.csv", function(d, i, columns) {
                     .attr("width", 36)
     
   legend.append("rect")
-          .attr("x", function(d,i){return (width +(150*i)+50)})
+          .attr("x", function(d,i){return (width +(300*i)+50)})
           .attr("width", 12)
           .attr("height", 12)
           .style("fill", z);
           
   legend.append("text")
-          .attr("x", function(d,i){return (width +(150*i)+110)})
+          .attr("x", function(d,i){return (width +(300*i)+110)})
           .attr("y", 5)
           .attr("dy", ".32em")
           .text(function(d) { return d; });
