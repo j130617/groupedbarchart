@@ -123,19 +123,30 @@ d3.csv("data.csv", function(d, i, columns) {
   //    .style("font-size", 9)
   //    .text("Omzet online detailhandel");   
   
-  var legendHolder = svg.append('g')
-      // translate the holder to the right side of the graph
-      .attr('transform', "translate(" + (-width) + "," + 365 + ")")
-      .attr('class','legendHolder')
+  //var legendHolder = svg.append('g')
+  //  // translate the holder to the right side of the graph
+  //    .attr('transform', "translate(" + (-width) + "," + 365 + ")")
+  //    .attr('class','legendHolder')
       
-  var legend = legendHolder.selectAll(".legend")
-                    //.data(keys.slice().reverse())
-  		    .data(keys.slice())
-                    .enter().append("g")
-                    .attr("class", "legend")
-                    .attr('transform', function(d, i) { return "translate(" + -40*i + "," + 0 + ")"; })
-                    .attr("width", 36)
-    
+  //var legend = legendHolder.selectAll(".legend")
+  //                  //.data(keys.slice().reverse())
+  //		    .data(keys.slice())
+  //                 .enter().append("g")
+  //                  .attr("class", "legend")
+  //                  .attr('transform', function(d, i) { return "translate(" + -40*i + "," + 0 + ")"; })
+  //                  .attr("width", 36)
+  var legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("x", w - 65)
+    .attr("y", 25)
+    .attr("height", 100)
+    .attr("width", 100);
+
+  legend.selectAll('g').data(dataset)
+      .enter()
+      .append('g')
+      .each(function(d, i) {
+        var g = d3.select(this);  
   legend.append("rect")
           //.attr("x", function(d,i){return (width +(150*i)+50)})
           //.attr("width", 12)
