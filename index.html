@@ -142,7 +142,7 @@ d3.csv("data.csv", function(d, i, columns) {
     .attr("height", 100)
     .attr("width", 100);
 
-  legend.selectAll('g').data(dataset)
+  legend.selectAll('g').data()
       .enter()
       .append('g')
       .each(function(d, i) {
