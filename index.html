@@ -38,8 +38,10 @@ body { font: 12px Arial;}
 
 // Set the dimensions of the canvas / graph
 var margin = {top: 40, right: 50, bottom: 70, left: 75},
-    width = 700 - margin.left - margin.right,
-    height = 425 - margin.top - margin.bottom;
+    //width = 700 - margin.left - margin.right,
+    //height = 425 - margin.top - margin.bottom;
+    width = 900 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 	// ranges grouped bar chart//
 var x0 = d3.scaleBand()
@@ -132,7 +134,7 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("y", 9.5)
       .attr("dy", "0.32em")
       .text(function(d) { return d; });
-});
+
 	
 /*  var legendHolder = svg.append('g')
     // translate the holder to the right side of the graph
@@ -159,7 +161,7 @@ d3.csv("data.csv", function(d, i, columns) {
           .attr("dy", ".32em")
           .text(function(d) { return d; }) //;
 	  .attr('text-anchor', 'end') //
-          //.attr('alignment-baseline', 'hanging');//
+          //.attr('alignment-baseline', 'hanging');// */
  
 		// Add a small label for the graph name.
  svg.append("text")
