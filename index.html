@@ -37,7 +37,6 @@ body { font: 12px Arial;}
 <script>
 
 // Set the dimensions of the canvas / graph
-//var margin = {top: 10, right: 20, bottom: 40, left: 50},//
 var margin = {top: 40, right: 50, bottom: 70, left: 75},
     width = 700 - margin.left - margin.right,
     height = 425 - margin.top - margin.bottom;
@@ -112,25 +111,15 @@ d3.csv("data.csv", function(d, i, columns) {
   svg.append("g")
       .attr("class", "axis")
       .call(d3.axisLeft(y)); //.ticks(10, "%"));
-  
-     	// Add a small label for the graph name.
-  //svg.append("text")
-  //    .attr("class", "title")
-  //    .attr("x", 10)
-  //    .attr("y", -10)
-  //    .attr("font-weight", "bold")
-  //    .style("text-anchor", "start")
-  //    .style("font-size", 9)
-  //    .text("Omzet online detailhandel");   
-  
+ 
+ 
   var legendHolder = svg.append('g')
     // translate the holder to the right side of the graph
       .attr('transform', "translate(" + (-width) + "," + 345 + ")")
       .attr('class','legendHolder')
       
   var legend = legendHolder.selectAll(".legend")
-                    //.data(keys.slice().reverse())
-  		    .data(keys.slice())
+                    .data(keys.slice())
                     .enter().append("g")
                     .attr("class", "legend")
                     .attr('transform', function(d, i) { return "translate(" + -40*i + "," + 0 + ")"; })
@@ -146,17 +135,14 @@ d3.csv("data.csv", function(d, i, columns) {
           .attr("x", function(d,i){return (width +(150*i)+110)})
           .attr("y", 5)
           .attr("dy", ".32em")
-          .text(function(d) { return d; });
+          .style("text-anchor", "middle")
+	  .text(function(d) { return d; });
  
 		// Add a small label for the graph name.
  svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", - 35)
       .attr("x", 0 - (height / 2))
-      //.attr("x", 10)
-      //.attr("y", -20)
-      //.attr("font-weight", "bold")
-      //.style("text-anchor", "start")
       .style("text-anchor", "middle")
       .style("font-size", 13)
       .text("x miljard euro");
