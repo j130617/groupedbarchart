@@ -135,7 +135,24 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("dy", "0.32em")
       .text(function(d) { return d; });
 
-	
+		// Add a small label for the graph name.
+ svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", - 35)
+      .attr("x", 0 - (height / 2))
+      .style("text-anchor", "middle")
+      .style("font-size", 13)
+      .text("x miljard euro");
+  
+ svg.append("text")
+      .attr("x", 430)  // space legend
+      .attr("y", height + 60)
+      .attr("class", "legend")    // style the legend
+      .style("text-anchor", "end")
+      .style("font-size", 11)
+      .text("Bron: CBS/Thuiswinkel.org/eigen berekening (*prognose op basis van groeiverwachting 2018)");
+ 
+}); 
 /*  var legendHolder = svg.append('g')
     // translate the holder to the right side of the graph
       .attr('transform', "translate(" + (-width) + "," + 345 + ")")
@@ -163,24 +180,9 @@ d3.csv("data.csv", function(d, i, columns) {
 	  .attr('text-anchor', 'end') //
           //.attr('alignment-baseline', 'hanging');// */
  
-		// Add a small label for the graph name.
- svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", - 35)
-      .attr("x", 0 - (height / 2))
-      .style("text-anchor", "middle")
-      .style("font-size", 13)
-      .text("x miljard euro");
-  
- svg.append("text")
-      .attr("x", 430)  // space legend
-      .attr("y", height + 60)
-      .attr("class", "legend")    // style the legend
-      .style("text-anchor", "end")
-      .style("font-size", 11)
-      .text("Bron: CBS/Thuiswinkel.org/eigen berekening (*prognose op basis van groeiverwachting 2018)");
- 
-}); 
-	
+
+		
+
 </script>
 </body>
+
