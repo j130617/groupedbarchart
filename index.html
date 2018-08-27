@@ -133,7 +133,9 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("x", width + 34)
       .attr("y", 9.5)
       .attr("dy", "0.32em")
-      .text(function(d) { return d; });
+      .text(function(d) { return d; }) //;
+      .style("text-anchor", "end");
+	
 
 		// Add a small label for the graph name.
  svg.append("text")
