@@ -37,7 +37,7 @@ body { font: 12px Arial;}
 <script>
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 40, right: 90, bottom: 70, left: 75},
+var margin = {top: 40, right: 120, bottom: 70, left: 65},
     //width = 700 - margin.left - margin.right,
     //height = 425 - margin.top - margin.bottom;
     width = 900 - margin.left - margin.right,
@@ -130,7 +130,7 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("fill", z);
 
   legend.append("text")
-      .attr("x", width + 43)
+      .attr("x", width + 46)
       .attr("y", 9.5)
       .attr("dy", "0.32em")
       .text(function(d) { return d; }) //;
