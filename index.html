@@ -119,7 +119,7 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("font-size", 10)
       .attr("text-anchor", "end")
     .selectAll("g")
-    .data(keys.slice().reverse())
+    .data(keys.slice()) //.reverse())
     .enter().append("g")
       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
@@ -151,7 +151,7 @@ d3.csv("data.csv", function(d, i, columns) {
       .attr("x", 430)  // space legend
       .attr("y", height + 60)
       .attr("class", "legend")    // style the legend
-      .style("text-anchor", "start")
+      .style("text-anchor", "end")
       .style("font-size", 11)
       .text("Bron: CBS/Thuiswinkel.org/eigen berekening (*prognose op basis van groeiverwachting 2018)");
  
