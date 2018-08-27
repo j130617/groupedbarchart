@@ -37,12 +37,10 @@ body { font: 12px Arial;}
 <script>
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 40, right: 120, bottom: 70, left: 65},
-    //width = 700 - margin.left - margin.right,
-    //height = 425 - margin.top - margin.bottom;
-    width = 900 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
+var margin = {top: 40, right: 130, bottom: 70, left: 65},
+    width = 700 - margin.left - margin.right,
+    height = 425 - margin.top - margin.bottom;
+    
 	// ranges grouped bar chart//
 var x0 = d3.scaleBand()
     .rangeRound([0, width])
@@ -148,7 +146,7 @@ d3.csv("data.csv", function(d, i, columns) {
       .text("x miljard euro");
   
  svg.append("text")
-      .attr("x", 430)  // space legend
+      .attr("x", 310)  // space legend
       .attr("y", height + 60)
       .attr("class", "legend")    // style the legend
       .style("text-anchor", "end")
