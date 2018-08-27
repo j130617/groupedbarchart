@@ -129,16 +129,16 @@ d3.csv("data.csv", function(d, i, columns) {
           .attr("x", function(d,i){return (width +(150*i)+50)})
           .attr("width", 12)
           .attr("height", 12)
-          .attr('alignment-baseline', 'hanging') //
+          //.attr('alignment-baseline', 'hanging') //
 	  .style("fill", z);
           
   legend.append("text")
-          .attr("x", function(d,i){return (width +(150*i)+110)})
+          .attr("x", function(d,i){return (width +(150*i)+130)})
           .attr("y", 5)
           .attr("dy", ".32em")
           .text(function(d) { return d; }) //;
 	  .attr('text-anchor', 'end') //
-          .attr('alignment-baseline', 'hanging');//
+          //.attr('alignment-baseline', 'hanging');//
  
 		// Add a small label for the graph name.
  svg.append("text")
