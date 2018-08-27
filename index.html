@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+	/*opmaak legenda*/
+.legend {
+    font-size: 10px;
+    /*font-weight: bold;*/
+    text-anchor: middle;
+}
+	/* opmaak barchart*/
+.bar { fill: steelblue; }
+	
+.toolTip {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: absolute;
+    display: none;
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: black;
+    font: 12px sans-serif;
+    padding: 5px;
+    text-align: center;
+}
+	
+</style>
+<body>
+	
+<!-- load the d3.js library -->    	
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script>
+
+// Set the dimensions of the canvas / graph
+//var margin = {top: 10, right: 20, bottom: 40, left: 50},//
+var margin = {top: 40, right: 50, bottom: 50, left: 75},
+    width = 500 - margin.left - margin.right,
+    height = 275 - margin.top - margin.bottom;
+
+	// ranges grouped bar chart//
+var x0 = d3.scaleBand()
+    .rangeRound([0, width])
+    .paddingInner(0.1);
+var x1 = d3.scaleBand()
+    .padding(0.05);
+var y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+var z = d3.scaleOrdinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]); //, "#d0743c", "#ff8c00"]);
+	
+// Define the div for the tooltip
+var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+//------------------------------------------------------------------
+	// Adds the chartOmzetMdw to canvas
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+	  "translate(" + margin.left + "," + margin.top + ")");
+	
+	// get the data //
+d3.csv("data.csv", function(d, i, columns) {
+  for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+  var keys = data.columns.slice(1);
+	
+	// Scale the range of the data
+  x0.domain(data.map(function(d) { return d.jaar; }));
+  x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
+  
+  
+  svg.append("g")
+    .selectAll("g")
+    .data(data)
+    .enter().append("g")
+      .attr("transform", function(d) { return "translate(" + x0(d.jaar) + ",0)"; })
+    .selectAll("rect")
+    .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
+    .enter().append("rect")
+      .attr("x", function(d) { return x1(d.key); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("width", x1.bandwidth())
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr("fill", function(d) { return z(d.key); })
+	  .on("mousemove", function(d){
+            tooltip
+              .style("left", d3.event.pageX + 10 + "px")
+              .style("top", d3.event.pageY - 25 + "px")
+              .style("display", "inline-block")
+              .html((d.key) + "<br>" + (d.value) * 100 + "%");
+	      
+        })
+    		.on("mouseout", function(d){ tooltip.style("display", "none");});
+	
+  	// Add the X Axis
+  svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x0));
+  
+	// Add the Y Axis
+  svg.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y).ticks(10, "%"));
+  
+     	// Add a small label for the graph name.
+  svg.append("text")
+      .attr("class", "title")
+      .attr("x", 10)
+      .attr("y", -10)
+      .attr("font-weight", "bold")
+      .style("text-anchor", "start")
+      .style("font-size", 9)
+      .text("Winstgevendheid");   
+  
+  var legendHolder = svg.append('g')
+      // translate the holder to the right side of the graph
+      .attr('transform', "translate(" + (-width) + "," + (+margin.bottom*4.15) + ")")
+      .attr('class','legendHolder')
+      
+  var legend = legendHolder.selectAll(".legend")
+                    //.data(keys.slice().reverse())
+  		    .data(keys.slice())
+                    .enter().append("g")
+                    .attr("class", "legend")
+                    .attr('transform', function(d, i) { return "translate(" + -40*i + "," + 0 + ")"; })
+                    .attr("width", 36)
+    
+  legend.append("rect")
+          .attr("x", function(d,i){return (width +(150*i)+50)})
+          .attr("width", 12)
+          .attr("height", 12)
+          .style("fill", zbg);
+          
+  legend.append("text")
+          .attr("x", function(d,i){return (width +(150*i)+110)})
+          .attr("y", 5)
+          .attr("dy", ".32em")
+          .text(function(d) { return d; });
+  
+  
+});
+	
+</script>
+</body>
